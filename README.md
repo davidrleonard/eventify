@@ -17,6 +17,8 @@ http://davidleonard.me/eventify/?name=Your%20Event&description=What%20a%20great%
 
 Make sure you throw `%20` in to replace spaces.
 
+**Pro-tip:** Too big? Too small? Blow up or shrink the browser page (look under view in the menu bar).
+
 # Use it on your computer
 
 ```
