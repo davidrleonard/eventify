@@ -1,23 +1,15 @@
 An event screen thingy
 ======
 
-This is a simple event screen. Pass it a few url parameters and you'll get a pretty, color-changing display you can put up at events
+This is a simple event screen. It shows pretty text at an event.
 
 # Use it on the web
 
-Open up a new browser and point it [at this url](http://davidleonard.me/eventify/):
-```
-http://davidleonard.me/eventify/
-```
+1. Open up a new browser and point it [http://davidleonard.me/eventify/](http://davidleonard.me/eventify/)
+2. Fill out the prompts
+3. Put it on a giant monitor or TV at your event
 
-To set the text, just pass in some url parameters for `name` and `description` [like this](http://davidleonard.me/eventify/?name=Your%20Event&description=What%20a%20great%20event):
-```
-http://davidleonard.me/eventify/?name=Your%20Event&description=What%20a%20great%20event
-```
-
-Make sure you throw `%20` in to replace spaces.
-
-**Pro-tip:** Too big? Too small? Blow up or shrink the browser page (look under view in the menu bar).
+**Pro-tip:** Too big? Too small? Zoom in or out with your browser.
 
 # Use it on your computer
 
@@ -27,4 +19,4 @@ cd eventify
 python -m SimpleHTTPServer
 ```
 
-Open a browser window and point it at the url and port printed out by Python in your terminal.
+Open a browser window and point it at the url and port printed out by Python in your terminal. Do stuff with it.
