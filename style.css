@@ -29,11 +29,6 @@ p {
     letter-spacing: 0.4em;
 }
 
-img {
-    width:75%;
-    margin-top:23vh;
-}
-
 .container {
     background-color: #cf1b41 !important; /* start with cfa red */
     z-index:-1;
