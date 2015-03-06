@@ -40,9 +40,11 @@
     }
 
     function createParams() {
-      var name = prompt('What\'s the name of your event?');
-      var description = prompt('What\'s a short description for your event?');
-      window.history.pushState('update tite', name, '/eventify/?name='+name+'&description='+description+'&');
+      var response = {};
+      response.name = prompt('What\'s the name of your event?');
+      response.description = prompt('What\'s a short description for your event?');
+      window.history.pushState('update tite', response.name, '/eventify/?name='+response.name+'&description='+response.description+'&');
+      return response;
     }
 
     function inputData(name,description) {
