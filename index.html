@@ -48,10 +48,16 @@
 
       if (name !== undefined) {
         document.title = urlParams['name'];
-        document.getElementById('name').innerHTML = urlParams['name'];
+        document.getElementById('name').innerHTML = name;
+      } else {
+        name = prompt('What\'s the name of your event?');
+        document.getElementById('name').innerHTML = name;
       }
       if (description !== undefined) {
-        document.getElementById('description').innerHTML = urlParams['description'];
+        document.getElementById('description').innerHTML = description;
+      } else {
+        description = prompt('What\'s a short description for your event?');
+        document.getElementById('description').innerHTML = description;
       }
     })();
   </script>
