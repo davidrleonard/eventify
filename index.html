@@ -20,18 +20,8 @@
   </body>
 
   <script>
-     /*
-     * Andy E on http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-     *
-     * Pops the URL parameters and assigns them to urlParams.
-     * 
-     * Ex: http://test.com/page.html?param1=something&param2=somethingElse
-     * var firstParam = urlParams['param1'] => 'something'
-     * var secondParam = urlParams['param2'] => 'somethingElse'
-     */
-    var urlParams;
 
-    (window.onpopstate = function () {
+    function getParams() {
       var match,
         pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
@@ -43,22 +33,31 @@
         urlParams[decode(match[1])] = decode(match[2]);
       }
 
-      var name = urlParams['name'];
-      var description = urlParams['description'];
+      var response = {};
+      response.name = urlParams['name'];
+      response.description = urlParams['description'];
+      return response;
+    }
 
-      if (name !== undefined) {
-        document.title = urlParams['name'];
-        document.getElementById('name').innerHTML = name;
-      } else {
-        name = prompt('What\'s the name of your event?');
-        document.getElementById('name').innerHTML = name;
+    function createParams() {
+      var name = prompt('What\'s the name of your event?');
+      var description = prompt('What\'s a short description for your event?');
+      window.history.pushState('update tite', name, '/?name='+name+'&description='+description+'&');
+    }
+
+    function inputData(name,description) {
+      document.title = name;
+      document.getElementById('name').innerHTML = name;
+
+      document.getElementById('description').innerHTML = description;
+    }
+
+    (window.onload = function () {
+      var params = getParams();
+      if (params.name == undefined || params.description == undefined){
+        var params = createParams();
       }
-      if (description !== undefined) {
-        document.getElementById('description').innerHTML = description;
-      } else {
-        description = prompt('What\'s a short description for your event?');
-        document.getElementById('description').innerHTML = description;
-      }
+      inputData(params.name,params.description);
     })();
   </script>
 
