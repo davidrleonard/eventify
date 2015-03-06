@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Eventify</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Load Typekit "Eventify" -->
+    <script src="//use.typekit.net/svt6fes.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="content" id="content">
+        <h1 id="name">Eventify</h1>
+        <p id="description">A simple, beautiful display for events</p>
+      </div><!-- end .content -->
+    </div><!-- end .container -->
+  </body>
+
+  <script>
+     /*
+     * Andy E on http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+     *
+     * Pops the URL parameters and assigns them to urlParams.
+     * 
+     * Ex: http://test.com/page.html?param1=something&param2=somethingElse
+     * var firstParam = urlParams['param1'] => 'something'
+     * var secondParam = urlParams['param2'] => 'somethingElse'
+     */
+    var urlParams;
+
+    (window.onpopstate = function () {
+      var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+      urlParams = {};
+      while (match = search.exec(query)) {
+        urlParams[decode(match[1])] = decode(match[2]);
+      }
+
+      var name = urlParams['name'];
+      var description = urlParams['description'];
+
+      if (name !== undefined) {
+        document.title = urlParams['name'];
+        document.getElementById('name').innerHTML = urlParams['name'];
+      }
+      if (description !== undefined) {
+        document.getElementById('description').innerHTML = urlParams['description'];
+      }
+    })();
+  </script>
+
+</html>

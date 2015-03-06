@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0;
+    padding:0;
+    text-align: center;
+}
+
+h1 {
+    font-family: "proxima-nova",sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    margin: 0;
+    color: white;
+    font-size: 12em;
+}
+
+p {
+    font-family: "abril-titling",Georgia,serif;
+    font-style: italic;
+    font-weight: 300;
+    margin:0;
+    margin-top: 1em;
+    color:white;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+}
+
+img {
+    width:75%;
+    margin-top:23vh;
+}
+
+.container {
+    background-color: #cf1b41 !important; /* start with cfa red */
+    z-index:-1;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: table;
+}
+
+.content {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@-webkit-keyframes colours {
+    /* cfa red */
+    0%   {  background-color: #cf1b41;  } 
+    /* cfa blue */
+    25%  {  background-color: #399fd3;  }
+    /* cfa teal */
+    50%  {  background-color: #00a175;  }
+    /* cfa purple */
+    75%  {  background-color: #69579C;  }
+    /* cfa red, completes loop */
+    100% {  background-color: #cf1b41;  }
+}
+
+@-moz-keyframes colours {
+    /* cfa red */
+    0%   {  background-color: #cf1b41;  } 
+    /* cfa blue */
+    25%  {  background-color: #399fd3;  }
+    /* cfa orange */
+    50%  {  background-color: #e87d2b;  }
+    /* cfa purple */
+    75%  {  background-color: #69579C;  }
+    /* cfa red, completes loop */
+    100% {  background-color: #cf1b41;  }
+}
+
+.container {
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: colours;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-direction: normal;
+    -moz-animation-duration: 20s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: colours;
+    -moz-animation-timing-function: ease;
+}
