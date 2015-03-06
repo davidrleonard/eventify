@@ -42,7 +42,9 @@
     function createParams() {
       var response = {};
       response.name = prompt('What\'s the name of your event?');
+      response.name = (response.name).replace(' ','%20');
       response.description = prompt('What\'s a short description for your event?');
+      response.description = (response.description).replace(' ','%20');
       window.history.pushState('update tite', response.name, '/eventify/?name='+response.name+'&description='+response.description+'&');
       return response;
     }
