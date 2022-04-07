@@ -1,4 +1,12 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&family=Roboto+Mono:wght@500&family=Roboto:wght@700&display=swap');
+
+:root {
+    --font-serif: 'PT Serif', serif;
+    --font-sans: 'Roboto', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+*, *:before, *:after {
     box-sizing: border-box;
 }
 
@@ -9,24 +17,35 @@ body {
 }
 
 h1 {
-    font-family: "proxima-nova",sans-serif;
+    /* font-family: "proxima-nova",sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700; */
+    font-family: var(--font-sans);
+    font-weight: bold;
+    font-style: normal;
     margin: 0;
     color: white;
     font-size: 12em;
 }
 
+h1.timer {
+    font-family: var(--font-mono);
+    font-weight: normal;
+}
+
 p {
-    font-family: "abril-titling",Georgia,serif;
+    /* font-family: "abril-titling",Georgia,serif;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 400; */
+    font-family: var(--font-serif);
+    font-weight: normal;
+    font-style: italic;
     margin:0;
     margin-top: 2em;
     color:white;
     font-size: 1.6em;
     /*text-transform: uppercase;*/
-    letter-spacing: 0.15em;
+    letter-spacing: 0.05em;
 }
 
 .container {
@@ -47,7 +66,7 @@ p {
     vertical-align: middle;
 }
 
-@-webkit-keyframes colours {
+@keyframes colors {
     /* cfa red */
     0%   {  background-color: #cf1b41;  } 
     /* cfa blue */
@@ -60,28 +79,10 @@ p {
     100% {  background-color: #cf1b41;  }
 }
 
-@-moz-keyframes colours {
-    /* cfa red */
-    0%   {  background-color: #cf1b41;  } 
-    /* cfa blue */
-    25%  {  background-color: #399fd3;  }
-    /* cfa orange */
-    50%  {  background-color: #e87d2b;  }
-    /* cfa purple */
-    75%  {  background-color: #69579C;  }
-    /* cfa red, completes loop */
-    100% {  background-color: #cf1b41;  }
-}
-
 .container {
-    -webkit-animation-direction: normal;
-    -webkit-animation-duration: 20s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: colours;
-    -webkit-animation-timing-function: ease;
-    -moz-animation-direction: normal;
-    -moz-animation-duration: 20s;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-name: colours;
-    -moz-animation-timing-function: ease;
+    animation-direction: normal;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-name: colors;
+    animation-timing-function: ease;
 }

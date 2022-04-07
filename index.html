@@ -1,68 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Eventify</title>
-    <link rel="stylesheet" href="style.css">
 
-    <!-- Load Typekit "Eventify" -->
-    <script src="//use.typekit.net/svt6fes.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Eventify</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-  <body>
-    <div class="container">
-      <div class="content" id="content">
-        <h1 id="name">Eventify</h1>
-        <p id="description">A simple, beautiful display for events</p>
-      </div><!-- end .content -->
-    </div><!-- end .container -->
-  </body>
+<body>
+  <div class="container">
+    <div class="content" id="content">
+      <h1 id="name">Eventify</h1>
+      <p id="description">A simple, beautiful display for events</p>
+    </div><!-- end .content -->
+  </div><!-- end .container -->
+</body>
 
-  <script>
+<script>
+  function searchParamsToObject(urlSearchParams) {
+    return Object.fromEntries(urlSearchParams.entries());
+  }
 
-    function getParams() {
-      var match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
+  function init(reprompt = false) {
+    const p = new URLSearchParams(window.location.search);
+    if (reprompt || p.get('name') === null || p.get('description') === null) {
+      const name = prompt("What's the name of your event?", p.get('name') || '');
+      const description = prompt("What's a short description for your event?", p.get('description') || '');
+      p.set('name', name);
+      p.set('description', description);
+      let search = p.toString();
+      // make "countdown%3A10m" --> "countdown:10m" so its easier to edit from the url
+      search = search.replace(/%3A/g, ':');
+      window.location.search = search;
+    }
+    render(searchParamsToObject(p));
+  }
 
-      urlParams = {};
-      while (match = search.exec(query)) {
-        urlParams[decode(match[1])] = decode(match[2]);
+  // https://stackoverflow.com/questions/20618355/how-to-write-a-countdown-timer-in-javascript
+  function startTimer(duration, el, suffix = '') {
+    var start = Date.now(),
+      timerInstance,
+      diff,
+      minutes,
+      seconds;
+    function timer() {
+      // get the number of seconds that have elapsed since 
+      // startTimer() was called
+      diff = duration - (((Date.now() - start) / 1000) | 0);
+
+      // does the same job as parseInt truncates the float
+      minutes = (diff / 60) | 0;
+      seconds = (diff % 60) | 0;
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      el.textContent = minutes + ":" + seconds + suffix;
+
+      if (diff <= 0) {
+        clearInterval(timerInstance);
       }
+    };
+    // we don't want to wait a full second before the timer starts
+    timer();
+    timerInstance = setInterval(timer, 1000);
+  }
 
-      var response = {};
-      response.name = urlParams['name'];
-      response.description = urlParams['description'];
-      return response;
+  const UNIT = {
+    HOURS: 'h',
+    MINUTES: 'm',
+    SECONDS: 's'
+  };
+
+  function render({ name = '', description = '' }) {
+    const $name = document.getElementById('name');
+    const $description = document.getElementById('description');
+
+    const countdownRegex = /^countdown\:([0-9]+)(h|m|s)$/;
+    if (countdownRegex.test(name)) {
+      let [, duration, unit] = countdownRegex.exec(name)
+      duration = parseInt(duration, 10);
+      if (unit === UNIT.HOURS) duration = duration * 60 * 60;
+      if (unit === UNIT.MINUTES) duration = duration * 60;
+      $name.classList.toggle('timer', true);
+      startTimer(duration, $name);
+    } else {
+      $name.textContent = name;
     }
 
-    function createParams() {
-      var response = {};
-      response.name = prompt('What\'s the name of your event?');
-      response.name = (response.name).replace(' ','%20');
-      response.description = prompt('What\'s a short description for your event?');
-      response.description = (response.description).replace(' ','%20');
-      window.history.pushState('update tite', response.name, '/eventify/?name='+response.name+'&description='+response.description+'&');
-      return response;
-    }
+    document.title = name;
+    $description.textContent = description;
+  }
 
-    function inputData(name,description) {
-      document.title = name;
-      document.getElementById('name').innerHTML = name;
+  window.onload = () => init();
 
-      document.getElementById('description').innerHTML = description;
-    }
-
-    (window.onload = function () {
-      var params = getParams();
-      if (params.name == undefined || params.description == undefined){
-        params = createParams();
-      }
-      inputData(params.name,params.description);
-    })();
-  </script>
+  document.addEventListener('click', () => init(true));
+</script>
 
 </html>
