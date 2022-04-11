@@ -24,8 +24,8 @@
   function init(reprompt = false) {
     const p = new URLSearchParams(window.location.search);
     if (reprompt || p.get('name') === null || p.get('description') === null) {
-      const name = prompt("What's the name of your event?", p.get('name') || '');
-      const description = prompt("What's a short description for your event?", p.get('description') || '');
+      const name = prompt("What's the title for your page? Tip: If you want a timer try countdown:5m", p.get('name') || '');
+      const description = prompt("What's the description for your page?", p.get('description') || '');
       p.set('name', name);
       p.set('description', description);
       let search = p.toString();
